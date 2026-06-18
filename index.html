@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navbar Styling */
+        .navbar-custom {
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-custom .navbar-brand {
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            margin: 0 5px;
+            padding: 10px 15px !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Header Section */
+        .page-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header h1 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card.card-blue { border-left-color: #667eea; }
+        .stat-card.card-green { border-left-color: #10b981; }
+        .stat-card.card-orange { border-left-color: #f59e0b; }
+        .stat-card.card-red { border-left-color: #ef4444; }
+
+        .stat-card h3 {
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-card.card-blue h3 { color: #667eea; }
+        .stat-card.card-green h3 { color: #10b981; }
+        .stat-card.card-orange h3 { color: #f59e0b; }
+        .stat-card.card-red h3 { color: #ef4444; }
+
+        .stat-card p {
+            color: #6b7280;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        /* Table Styling */
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .table-card h4 {
+            color: #1e3c72;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background: #f3f4f6;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge-department {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e3c72;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 20px 0;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .stat-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .table {
+                font-size: 0.85rem;
+            }
+
+            .table thead th {
+                padding: 10px 5px;
+            }
+
+            .table tbody td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+    <title>ข้อมูลการสมัครรางวัล - กรมสุขภาพจิต</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-award"></i> การสมัครรางวัล
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showYear(2569)">ปี 2569</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showYear(2568)">ปี 2568</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showYear(2567)">ปี 2567</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1><i class="fas fa-database"></i> ข้อมูลการสมัครรางวัลเลิศรัฐ</h1>
+            <p id="yearDisplay" class="mb-0">ข้อมูลปี 2569</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-fluid px-3 px-md-4">
+        <!-- Statistics Row -->
+        <div class="row mb-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card card-blue">
+                    <h3 id="totalCount">28</h3>
+                    <p>จำนวนสมัครทั้งหมด</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card card-green">
+                    <h3 id="approvedCount">22</h3>
+                    <p>อนุมัติแล้ว</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card card-orange">
+                    <h3 id="pendingCount">4</h3>
+                    <p>รอพิจารณา</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card card-red">
+                    <h3 id="rejectedCount">2</h3>
+                    <p>ไม่อนุมัติ</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-card">
+            <h4><i class="fas fa-table"></i> ตารางข้อมูลการสมัคร</h4>
+            <div class="table-responsive">
+                <table class="table table-hover" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">ลำดับที่</th>
+                            <th style="width: 30%;">ชื่อเรื่องการสมัคร</th>
+                            <th style="width: 25%;">หน่วยงาน</th>
+                            <th style="width: 15%;">เบอรโทรศัพท์</th>
+                            <th style="width: 12%;">สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container-fluid">
+            <p><strong>กรมสุขภาพจิต</strong> &copy; 2569 | ระบบข้อมูลการสมัครรางวัลเลิศรัฐ</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // ข้อมูลการสมัครรางวัลตามปี
+        const awardData = {
+            2569: [
+                { no: 1, title: "โครงการส่งเสริมสุขภาพจิตแบบบูรณาการ", department: "สำนักผู้บริหาร", phone: "0812345678", status: "อนุมัติ" },
+                { no: 2, title: "วิจัยการใช้ AI ในการประเมินสุขภาพจิต", department: "ศูนย์วิจัย", phone: "0823456789", status: "อนุมัติ" },
+                { no: 3, title: "การพัฒนาบุคลากรด้านการให้คำปรึกษา", department: "สำนักบุคลากร", phone: "0834567890", status: "อนุมัติ" },
+                { no: 4, title: "ระบบเทคโนโลยีเพื่อการบริหารจัดการ", department: "สำนักเทคโนโลยี", phone: "0845678901", status: "อนุมัติ" },
+                { no: 5, title: "บริการสุขภาพจิตในชุมชนแบบเชิงรุก", department: "สถาบันสุขภาพจิต", phone: "0856789012", status: "อนุมัติ" },
+                { no: 6, title: "การศึกษาด้านสุขภาพจิตชุมชน", department: "สำนักประกาศิต", phone: "0867890123", status: "อนุมัติ" },
+                { no: 7, title: "เครื่องมือคัดกรองสุขภาพจิตที่ดีขึ้น", department: "ศูนย์วิจัย", phone: "0878901234", status: "อนุมัติ" },
+                { no: 8, title: "โครงการอบรมทักษะชีวิต", department: "สถาบันสุขภาพจิต", phone: "0889012345", status: "รอพิจารณา" },
+                { no: 9, title: "ระบบ CRM สำหรับการบริการ", department: "สำนักเทคโนโลยี", phone: "0890123456", status: "รอพิจารณา" },
+                { no: 10, title: "การบูรณาการบริการสุขภาพจิตและกายภาพ", department: "สำนักผู้บริหาร", phone: "0901234567", status: "ไม่อนุมัติ" },
+                { no: 11, title: "แนวทางป้องกันสุขภาพจิต", department: "ศูนย์วิจัย", phone: "0912345678", status: "อนุมัติ" },
+                { no: 12, title: "การวัดประสิทธิผลของการรักษา", department: "สถาบันสุขภาพจิต", phone: "0923456789", status: "อนุมัติ" },
+                { no: 13, title: "ฝึกอบรมการจัดการความเครียด", department: "สำนักบุคลากร", phone: "0934567890", status: "อนุมัติ" },
+                { no: 14, title: "พัฒนาคุณภาพการให้บริการ", department: "สำนักประกาศิต", phone: "0945678901", status: "อนุมัติ" },
+                { no: 15, title: "โครงการเสริมสร้างสุขภาพจิตเด็ก", department: "สถาบันสุขภาพจิต", phone: "0956789012", status: "อนุมัติ" },
+                { no: 16, title: "การศึกษาปัจจัยเสี่ยงในสังคม", department: "ศูนย์วิจัย", phone: "0967890123", status: "อนุมัติ" },
+                { no: 17, title: "แบบประเมินสุขภาพจิตสำหรับผู้สูงอายุ", department: "สำนักประกาศิต", phone: "0978901234", status: "อนุมัติ" },
+                { no: 18, title: "โครงการติดตามผู้ป่วยหลังการรักษา", department: "สถาบันสุขภาพจิต", phone: "0989012345", status: "อนุมัติ" },
+                { no: 19, title: "ระบบข้อมูลการประเมินสุขภาพจิต", department: "สำนักเทคโนโลยี", phone: "0990123456", status: "อนุมัติ" },
+                { no: 20, title: "การสอนการตรวจประเมินสุขภาพจิต", department: "สำนักบุคลากร", phone: "0801234567", status: "อนุมัติ" },
+                { no: 21, title: "โครงการส่งเสริมสุขภาพจิตสตรี", department: "สถาบันสุขภาพจิต", phone: "0802345678", status: "อนุมัติ" },
+                { no: 22, title: "การพัฒนาแหล่งข้อมูลออนไลน์", department: "สำนักเทคโนโลยี", phone: "0803456789", status: "อนุมัติ" },
+                { no: 23, title: "การจัดการผู้ป่วยเรื้อรังด้านจิต", department: "สถาบันสุขภาพจิต", phone: "0804567890", status: "รอพิจารณา" },
+                { no: 24, title: "โครงการศูนย์การเรียนรู้สุขภาพจิต", department: "สำนักประกาศิต", phone: "0805678901", status: "รอพิจารณา" },
+                { no: 25, title: "การพัฒนากระบวนการคัดกรองสุขภาพจิต", department: "ศูนย์วิจัย", phone: "0806789012", status: "ไม่อนุมัติ" },
+                { no: 26, title: "โครงการเก็บข้อมูลสุขภาพจิตชุมชน", department: "สถาบันสุขภาพจิต", phone: "0807890123", status: "อนุมัติ" },
+                { no: 27, title: "ระบบจัดสรรอุปกรณ์การรักษา", department: "สำนักเทคโนโลยี", phone: "0808901234", status: "อนุมัติ" },
+                { no: 28, title: "โครงการส่งเสริมสุขภาพจิตสตรีหมู่บ้าน", department: "สถาบันสุขภาพจิต", phone: "0809012345", status: "อนุมัติ" }
+            ],
+            2568: [
+                { no: 1, title: "โครงการพัฒนาการให้บริการสุขภาพจิต", department: "สำนักผู้บริหาร", phone: "0812345678", status: "อนุมัติ" },
+                { no: 2, title: "วิจัยเชิงลึกเกี่ยวกับการรักษา", department: "ศูนย์วิจัย", phone: "0823456789", status: "อนุมัติ" },
+                { no: 3, title: "การฝึกอบรมบุคลากรใหม่", department: "สำนักบุคลากร", phone: "0834567890", status: "อนุมัติ" },
+                { no: 4, title: "ระบบจัดการข้อมูลผู้ป่วย", department: "สำนักเทคโนโลยี", phone: "0845678901", status: "อนุมัติ" },
+                { no: 5, title: "โครงการสนับสนุนสุขภาพจิตเด็ก", department: "สถาบันสุขภาพจิต", phone: "0856789012", status: "อนุมัติ" },
+                { no: 6, title: "การศึกษาความต้องการบริการ", department: "สำนักประกาศิต", phone: "0867890123", status: "รอพิจารณา" },
+                { no: 7, title: "พัฒนาคู่มือการให้บริการ", department: "สถาบันสุขภาพจิต", phone: "0878901234", status: "รอพิจารณา" },
+                { no: 8, title: "โครงการเสริมสร้างความรู้", department: "สำนักประกาศิต", phone: "0889012345", status: "ไม่อนุมัติ" },
+                { no: 9, title: "การบูรณาการบริการด้านสุขภาพ", department: "สถาบันสุขภาพจิต", phone: "0890123456", status: "อนุมัติ" },
+                { no: 10, title: "ระบบสารสนเทศเพื่อการบริหาร", department: "สำนักเทคโนโลยี", phone: "0901234567", status: "อนุมัติ" }
+            ],
+            2567: [
+                { no: 1, title: "โครงการยุคแรกของการปฏิรูป", department: "สำนักผู้บริหาร", phone: "0812345678", status: "อนุมัติ" },
+                { no: 2, title: "การศึกษาปัจจัยเสี่ยง", department: "ศูนย์วิจัย", phone: "0823456789", status: "อนุมัติ" },
+                { no: 3, title: "พัฒนาบทบาทของเจ้าหน้าที่", department: "สำนักบุคลากร", phone: "0834567890", status: "อนุมัติ" },
+                { no: 4, title: "ระบบรายงานผลการทำงาน", department: "สำนักเทคโนโลยี", phone: "0845678901", status: "อนุมัติ" },
+                { no: 5, title: "โครงการส่งเสริมการทำงาน", department: "สถาบันสุขภาพจิต", phone: "0856789012", status: "อนุมัติ" },
+                { no: 6, title: "การศึกษาอิทธิพลของสิ่งแวดล้อม", department: "ศูนย์วิจัย", phone: "0867890123", status: "อนุมัติ" },
+                { no: 7, title: "โครงการสนับสนุนนวัตกรรม", department: "สำนักประกาศิต", phone: "0878901234", status: "รอพิจารณา" },
+                { no: 8, title: "การพัฒนาทักษะในการบริหาร", department: "สำนักบุคลากร", phone: "0889012345", status: "ไม่อนุมัติ" }
+            ]
+        };
+
+        let currentYear = 2569;
+
+        // ฟังก์ชันแสดงข้อมูลตามปี
+        function showYear(year) {
+            currentYear = year;
+            document.getElementById('yearDisplay').textContent = `ข้อมูลปี ${year}`;
+            
+            // อัปเดต Active Link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // อัปเดตตาราง
+            updateTable();
+            updateStats();
+        }
+
+        function updateTable() {
+            const data = awardData[currentYear];
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                let statusBadge = '';
+                let statusClass = '';
+
+                if (item.status === 'อนุมัติ') {
+                    statusBadge = '<span class="badge bg-success">✓ อนุมัติ</span>';
+                } else if (item.status === 'รอพิจารณา') {
+                    statusBadge = '<span class="badge bg-warning text-dark">⏳ รอพิจารณา</span>';
+                } else {
+                    statusBadge = '<span class="badge bg-danger">✗ ไม่อนุมัติ</span>';
+                }
+
+                row.innerHTML = `
+                    <td>${item.no}</td>
+                    <td><strong>${item.title}</strong></td>
+                    <td><span class="badge-department">${item.department}</span></td>
+                    <td>${item.phone}</td>
+                    <td>${statusBadge}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function updateStats() {
+            const data = awardData[currentYear];
+            const total = data.length;
+            const approved = data.filter(d => d.status === 'อนุมัติ').length;
+            const pending = data.filter(d => d.status === 'รอพิจารณา').length;
+            const rejected = data.filter(d => d.status === 'ไม่อนุมัติ').length;
+
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('approvedCount').textContent = approved;
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('rejectedCount').textContent = rejected;
+        }
+
+        // โหลดข้อมูลเริ่มต้น
+        updateTable();
+        updateStats();
+    </script>
+</body>
+</html>
